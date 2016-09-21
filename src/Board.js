@@ -79,32 +79,25 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      if (this._currentAttributes[rowIndex].reduce(function (a, b) {
-        return a + b;
-      }) === 1) {
-        return false;
-      } else {
+      var total = 0;
+      this._currentAttributes[rowIndex].forEach(function (value) {
+        total += value;
+      });
+      if (total > 1) {
         return true;
+      } else {
+        return false;
       }
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      var i = 0;
-      for (i; i < 4; i++) {
-        if (this._currentAttributes[i].reduce(function (a, b) {
-          return a + b;
-        }) === 1) {
+      for (var key in this._currentAttributes) {
+        if (key === 'n') {
           return false;
-        } else {
-
-          // if (this._currentAttributes[i].reduce(function (a, b) {
-          //   return a + b;
-          // }) === 0) {
-          //   return false;
-          // } else {
+        }
+        if (this.hasRowConflictAt(key) === true) {
           return true;
-          // }
         }
       }
     },
