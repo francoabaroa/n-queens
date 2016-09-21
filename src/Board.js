@@ -109,12 +109,41 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      // iterate through currentAttributes object
+      var total = 0;
+      // find row at colIndex
+      for (var key in this._currentAttributes) {
+        if (key !== 'n') {
+          // add to total
+          total += this._currentAttributes[key][colIndex];          
+        }
+      }
+      // check if total is greater than 1
+      if (total > 1) {
+        // return true if yes
+        return true;
+      } else {
+        // return false if no
+        return false;         
+      }
+
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      // iterate through currentAttributes object
+      for (var key in this._currentAttributes) {
+        // if key is not a number
+        if (key === 'n') {
+          // return false
+          return false;
+        }
+        // if hasColConflict(key) is true
+        if (this.hasColConflictAt(parseInt(key)) === true) {
+          // return true
+          return true;
+        }      
+      }
     },
 
 
