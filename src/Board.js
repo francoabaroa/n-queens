@@ -97,7 +97,14 @@
         }) === 1) {
           return false;
         } else {
+
+          // if (this._currentAttributes[i].reduce(function (a, b) {
+          //   return a + b;
+          // }) === 0) {
+          //   return false;
+          // } else {
           return true;
+          // }
         }
       }
     },
