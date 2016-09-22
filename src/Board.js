@@ -157,7 +157,6 @@
       var total = 0;
       var colMinusRow = majorDiagonalColumnIndexAtFirstRow;
       
-
       if (colMinusRow < 0) {
         if (colMinusRow === -1) {
           total = this._currentAttributes[1][0] + this._currentAttributes[2][1] + this._currentAttributes[3][2];
@@ -209,7 +208,6 @@
       var diagonalIndex = minorDiagonalColumnIndexAtFirstRow;
       var total = 0;
       var colPlusRow = minorDiagonalColumnIndexAtFirstRow;
-      
 
       if (colPlusRow > 4) {
         if (colPlusRow === 4) {
@@ -233,9 +231,6 @@
       } else {
         return false;
       }
-
-
-
     },
 
     // test if any minor diagonals on this board contain conflicts
