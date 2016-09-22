@@ -153,7 +153,23 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      debugger;
+      var savedIndex = majorDiagonalColumnIndexAtFirstRow;
+      // iterate through currentAttributes object
+      for (var key in this._currentAttributes) {
+        if (key !== '0' || key !== 'n') {
+          // + 1 to see if savedIndex = length of array
+          savedIndex += 1;
+          if (savedIndex === 4) {
+            return false;
+          }
+          // if conflict found, break the current loop
+          if (this._currentAttributes[key][savedIndex] === 1) {
+            return true;
+          }
+        } 
+      }
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
