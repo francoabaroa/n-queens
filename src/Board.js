@@ -153,28 +153,62 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      debugger;
       var savedIndex = majorDiagonalColumnIndexAtFirstRow;
-      // iterate through currentAttributes object
+      var total = 0;
+      
       for (var key in this._currentAttributes) {
-        if (key !== '0' || key !== 'n') {
-          // + 1 to see if savedIndex = length of array
-          savedIndex += 1;
-          if (savedIndex === 4) {
-            return false;
-          }
-          // if conflict found, break the current loop
-          if (this._currentAttributes[key][savedIndex] === 1) {
-            return true;
-          }
-        } 
+        //go to first array at majorDiagonalColumnIndexAtFirstRow
+        if (key !== 'n' && this._currentAttributes[key][savedIndex] === 1) {
+          total++;
+        }
+        savedIndex++;
       }
-      return false;
+
+      if (total <= 1) {
+        return false;
+      } else {
+        return true;
+      }
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var savedIndex = 0;
+      var total = 0;
+      var flag = true;
+      var wasFound = false;
+      // iterate through currentAttributes object
+      debugger;
+      for (var key in this._currentAttributes) {
+        // check if row contains value of 1
+        if (flag && key !== 'n') {
+          for (var i = 0; i < 4; i++) {
+            if (this._currentAttributes[key][i] === 1) {
+              savedIndex = i + 1;
+              total++;
+              flag = false;
+              wasFound = true;
+              break;
+            } 
+          }
+        }
+
+        if (wasFound) {
+          if (this._currentAttributes[key][savedIndex] === 1) {
+            savedIndex++;
+            total++;
+          } else {
+            savedIndex++;
+          }
+        }
+        
+        if (total <= 1) {
+          return false;
+        } else {
+          return true;
+        }
+        
+      }
     },
 
 
