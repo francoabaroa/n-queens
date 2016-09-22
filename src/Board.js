@@ -153,11 +153,15 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      var columnIndex = majorDiagonalColumnIndexAtFirstRow;
       var savedIndex = majorDiagonalColumnIndexAtFirstRow;
       var total = 0;
       
+      console.log(this);
       for (var key in this._currentAttributes) {
-        //go to first array at majorDiagonalColumnIndexAtFirstRow
+
+        for (var i = 0; )
+
         if (key !== 'n' && this._currentAttributes[key][savedIndex] === 1) {
           total++;
         }
@@ -178,7 +182,6 @@
       var flag = true;
       var wasFound = false;
       // iterate through currentAttributes object
-      debugger;
       for (var key in this._currentAttributes) {
         // check if row contains value of 1
         if (flag && key !== 'n') {
@@ -192,23 +195,24 @@
             } 
           }
         }
-
-        if (wasFound) {
-          if (this._currentAttributes[key][savedIndex] === 1) {
-            savedIndex++;
-            total++;
-          } else {
-            savedIndex++;
-          }
-        }
-        
-        if (total <= 1) {
-          return false;
-        } else {
-          return true;
-        }
-        
       }
+
+      if (wasFound) {
+        if (this._currentAttributes[key][savedIndex] === 1) {
+          savedIndex++;
+          total++;
+        } else {
+          savedIndex++;
+        }
+      }
+      
+      if (total <= 1) {
+        return false;
+      } else {
+        return true;
+      }
+        
+      
     },
 
 
