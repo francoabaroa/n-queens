@@ -209,7 +209,7 @@
       var total = 0;
       var colPlusRow = minorDiagonalColumnIndexAtFirstRow;
 
-      if (colPlusRow > 4) {
+      if (colPlusRow >= 4) {
         if (colPlusRow === 4) {
           total = this._currentAttributes[1][3] + this._currentAttributes[2][2] + this._currentAttributes[3][1];
         } else if (colPlusRow === 5) {
