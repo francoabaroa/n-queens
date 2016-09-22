@@ -153,25 +153,25 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      var savedIndex = Math.abs(majorDiagonalColumnIndexAtFirstRow);
+      var diagonalIndex = Math.abs(majorDiagonalColumnIndexAtFirstRow);
       var total = 0;
-      var thiss = majorDiagonalColumnIndexAtFirstRow;
+      var colMinusRow = majorDiagonalColumnIndexAtFirstRow;
       
 
-      if (thiss < 0) {
-        if (thiss === -1) {
+      if (colMinusRow < 0) {
+        if (colMinusRow === -1) {
           total = this._currentAttributes[1][0] + this._currentAttributes[2][1] + this._currentAttributes[3][2];
-        } else if (thiss === -2) {
+        } else if (colMinusRow === -2) {
           total = this._currentAttributes[2][0] + this._currentAttributes[3][1];
         } else {
           return false;
         }
       } else {
         for (var key in this._currentAttributes) {
-          if (key !== 'n' && this._currentAttributes[key][savedIndex] === 1) {
+          if (key !== 'n' && this._currentAttributes[key][diagonalIndex] === 1) {
             total++;
           }
-          savedIndex++;
+          diagonalIndex++;
         }
       }
 
@@ -184,13 +184,13 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      var index = 0;
+      var colMinusRow = 0;
 
       for (var key in this._currentAttributes) {
         for (var i = 0; i < 4; i++) {
           if (this._currentAttributes[key][i] === 1) {
-            index = i - parseInt(key);
-            if (this.hasMajorDiagonalConflictAt(index)) {
+            colMinusRow = i - parseInt(key);
+            if (this.hasMajorDiagonalConflictAt(colMinusRow)) {
               return true;
             }
           }
@@ -206,25 +206,25 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      var savedIndex = minorDiagonalColumnIndexAtFirstRow;
+      var diagonalIndex = minorDiagonalColumnIndexAtFirstRow;
       var total = 0;
-      var thiss = minorDiagonalColumnIndexAtFirstRow;
+      var colPlusRow = minorDiagonalColumnIndexAtFirstRow;
       
 
-      if (thiss > 4) {
-        if (thiss === 4) {
+      if (colPlusRow > 4) {
+        if (colPlusRow === 4) {
           total = this._currentAttributes[1][3] + this._currentAttributes[2][2] + this._currentAttributes[3][1];
-        } else if (thiss === 5) {
+        } else if (colPlusRow === 5) {
           total = this._currentAttributes[2][3] + this._currentAttributes[3][2];
         } else {
           return false;
         }
       } else {
         for (var key in this._currentAttributes) {
-          if (key !== 'n' && this._currentAttributes[key][savedIndex] === 1) {
+          if (key !== 'n' && this._currentAttributes[key][diagonalIndex] === 1) {
             total++;
           }
-          savedIndex--;
+          diagonalIndex--;
         }
       }
 
@@ -240,37 +240,19 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      var index = 0;
+      var colPlusRow = 0;
 
       for (var key in this._currentAttributes) {
         for (var i = 0; i < 4; i++) {
           if (this._currentAttributes[key][i] === 1) {
-            index = i + parseInt(key);
-            if (this.hasMinorDiagonalConflictAt(index)) {
+            colPlusRow = i + parseInt(key);
+            if (this.hasMinorDiagonalConflictAt(colPlusRow)) {
               return true;
             }
           }
         }
       }
       return false;
-
-
-
-
-
-      // var index = 0;
-
-      // for (var key in this._currentAttributes) {
-      //   for (var i = 3; i >= 0; i--) {
-      //     if (this._currentAttributes[key][i] === 1) {
-      //       index = parseInt(key) + i;
-      //       if (this.hasMinorDiagonalConflictAt(index)) {
-      //         return true;
-      //       }
-      //     }
-      //   }
-      // }
-      // return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
